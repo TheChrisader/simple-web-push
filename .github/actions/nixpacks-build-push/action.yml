@@ -48,7 +48,7 @@ runs:
     - uses: docker/setup-qemu-action@v3
       if: inputs.platforms != ''
 
-    - run: echo "GITHUB_REPOSITORY=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+    - run: echo "GITHUB_REPOSITORY=${github.repository,,}" >> $GITHUB_ENV
       shell: bash
 
     - run: echo "The lowercase repository name is $GITHUB_REPOSITORY."
