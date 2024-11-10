@@ -37,8 +37,6 @@ runs:
   using: 'composite'
   steps:
     # TODO can we remove this?
-    - name: Set lowercase GITHUB_REPOSITORY
-      run: echo "GITHUB_REPOSITORY=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
 
     - name: Set GitHub Path
       run: echo "$GITHUB_ACTION_PATH" >> $GITHUB_PATH
@@ -49,6 +47,9 @@ runs:
     # TODO should detect if qemu is needed based on current vs target platform
     - uses: docker/setup-qemu-action@v3
       if: inputs.platforms != ''
+
+    run: |
+      echo "GITHUB_REPOSITORY=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
 
     - run: entrypoint.sh
       shell: bash
