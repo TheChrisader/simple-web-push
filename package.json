@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node ./generateVapidKeys.js && next dev",
+    "dev": "node ./generateVapidKeys.js && next dev -p 5500 --experimental-https",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 5500",
     "lint": "next lint"
   },
   "dependencies": {

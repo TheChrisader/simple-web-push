@@ -22,6 +22,17 @@ self.addEventListener('push', function (event) {
       url,
     },
     badge,
+    silent: true,
+    actions: [
+      {
+        action: 'open',
+        title: 'Open',
+      },
+      {
+        action: 'close',
+        title: 'Close',
+      },
+    ],
   };
 
   event.waitUntil(
@@ -29,4 +40,23 @@ self.addEventListener('push', function (event) {
       sendDeliveryReportAction();
     }),
   );
+});
+
+self.addEventListener('notificationclick', event => {
+  console.log(event.action);
+  event.notification.close(); // Close the notification
+  switch (event.action) {
+    case 'open':
+      // Handle action1
+      clients.openWindow('https://example.com/action1');
+      break;
+    case 'close':
+      // Handle action2
+      clients.openWindow('https://example.com/action2');
+      break;
+    default:
+      // Handle default click
+      clients.openWindow('https://example.com/default');
+      break;
+  }
 });
