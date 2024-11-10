@@ -7,7 +7,6 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  GITHUB_REPOSITORY: thechrisader/simple-web-push
 
 jobs:
   build:
@@ -22,6 +21,9 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set lowercase GITHUB_REPOSITORY
+        run: echo "GITHUB_REPOSITORY=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
 
       - name: Build and push Docker image
         uses: iloveitaly/github-action-nixpacks@main
