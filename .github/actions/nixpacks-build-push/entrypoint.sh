@@ -178,4 +178,4 @@ elif [ -n "$PLATFORMS" ]; then
   build_and_push
 fi
 
-echo "Nixpacks Build & Push completed successfully.
+echo "Nixpacks Build & Push completed successfully."
