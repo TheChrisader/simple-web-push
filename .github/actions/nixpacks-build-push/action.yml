@@ -50,6 +50,7 @@ runs:
 
     - run: |
         echo "GITHUB_REPOSITORY=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+      shell: bash
 
     - run: entrypoint.sh
       shell: bash
