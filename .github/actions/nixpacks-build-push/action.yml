@@ -48,8 +48,8 @@ runs:
     - uses: docker/setup-qemu-action@v3
       if: inputs.platforms != ''
 
-    - run: echo "GITHUB_REPOSITORY=${github.repository,,}" >> $GITHUB_ENV
-      shell: bash
+    # - run: echo "GITHUB_REPOSITORY=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+    #   shell: bash
 
     - run: echo "The lowercase repository name is $GITHUB_REPOSITORY."
       shell: bash
@@ -69,6 +69,7 @@ runs:
         # raw SHA of the commit which triggered the workflow
         GIT_SHA: ${{ github.sha }}
         # username/repo
+        GITHUB_REPOSITORY: thechrisader/simple-web-push
         # github.com/username/repo
         GITHUB_REPOSITORY_URL: ${{ github.server_url }}/${{ github.repository }}
         # for author extraction
