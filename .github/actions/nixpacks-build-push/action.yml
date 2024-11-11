@@ -32,6 +32,10 @@ inputs:
     description: 'Boolean to determine if the built image should be pushed'
     required: false
     default: 'false'
+  image_name:
+    description: 'Name of the image to build'
+    required: false
+    default: ${{ github.repository }}
 
 runs:
   using: 'composite'
@@ -48,9 +52,6 @@ runs:
     - uses: docker/setup-qemu-action@v3
       if: inputs.platforms != ''
 
-    - run: echo "The lowercase repository name is $GITHUB_REPOSITORY."
-      shell: bash
-
     - run: entrypoint.sh
       shell: bash
       env:
@@ -62,6 +63,7 @@ runs:
         INPUT_APT: ${{ inputs.apt }}
         INPUT_PUSH: ${{ inputs.push }}
         INPUT_ENV: ${{ inputs.env }}
+        INPUT_IMAGE_NAME: ${{ inputs.image_name }}
 
         # raw SHA of the commit which triggered the workflow
         GIT_SHA: ${{ github.sha }}
